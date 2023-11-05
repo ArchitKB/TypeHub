@@ -1,6 +1,8 @@
 import React from "react";
 import content from "./Typing-content";
 
+//test comment
+
 function Text() {
   return (
     <div className="long">
