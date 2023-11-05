@@ -26,6 +26,7 @@ code {
 
 .right{
   align-self: right;
+  
 }
 
 .body{
@@ -86,4 +87,16 @@ code {
   background-color: red;
   opacity: 0.5;
   color: white;
+}
+
+/* Header.css */
+
+.right-links {
+  margin-left: auto; /* This will push the links to the right */
+  display: flex;
+  gap: 10px; /* Adjust this value to add more or less space between the links */
+}
+
+.right {
+  margin: 0; /* Remove any default margins on the <p> elements */
 }
