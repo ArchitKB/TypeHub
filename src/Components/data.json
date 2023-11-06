@@ -1,0 +1,43 @@
+{
+    "exercises": [
+      {
+        "id": 1,
+        "title": "Basic Practice",
+        "text": "The quick brown fox jumps over the lazy dog.",
+        "difficulty": "easy"
+      },
+      {
+        "id": 2,
+        "title": "Advanced Practice",
+        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "difficulty": "hard"
+      }
+    ],
+    "lessons": [
+      {
+        "id": 101,
+        "title": "Lesson 1",
+        "text": "Welcome to Typing Master!"
+      },
+      {
+        "id": 102,
+        "title": "Lesson 2",
+        "text": "Practice makes perfect."
+      }
+    ],
+    "users": [
+      {
+        "id": 1001,
+        "username": "john_doe",
+        "email": "john@example.com",
+        "achievements": ["Fast Typist", "Completionist"]
+      },
+      {
+        "id": 1002,
+        "username": "jane_doe",
+        "email": "jane@example.com",
+        "achievements": ["Pro Typist"]
+      }
+    ]
+  }
+  
