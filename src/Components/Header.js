@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "./logo-removebg-preview.png";
 import {Link} from "react-router-dom"
+import Body from "./Body";
 
 function Header() {
   
@@ -16,6 +17,8 @@ function Header() {
           <Link className="right" to="/login">Login</Link>
         </div>
       </header>
+      <Body/>
+
     </div>
   );
 }
