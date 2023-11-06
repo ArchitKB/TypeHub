@@ -21,7 +21,7 @@ app.post('./login',async(req,res)=>{
     res.send('successfully')
 
 })
-app.listen(3000, () => {
+app.listen(8080, () => {
     console.log("server is running on port:3000");
   });
   
