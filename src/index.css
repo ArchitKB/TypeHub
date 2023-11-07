@@ -90,6 +90,47 @@ code {
   color: white;
 }
 
+.super{
+  resize: none;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  top:0;
+  left:4px;
+  font-size: 18px;
+  width: 98%;
+  height: 80%;
+  position: absolute;
+  text-align: left;
+  padding: 2px 2px 2px 2px;
+  font-family: monospace;
+  user-select: none;
+  pointer-events: none;
+  color: gray;
+}
+
+.col-red{
+  color: red;
+}
+
+.col-green{
+  color: green;
+}
+
+.super-list{
+  font-size: 0;
+  padding: 0;
+}
+
+.super-list li{
+  display: inline;
+  font-size: 18px;
+}
+
+.guide-text{
+  color: cadetblue;
+}
+
 /* Header.css */
 
 .right-links {
