@@ -28,12 +28,12 @@ app.post('/signup', async (req, res) => {
 });
 
 app.post('/login', async (req, res) => {
-  console.log(req.body)
+  
   let email = req.body.email;
   const password = req.body.password;
   try {
     let userData = await usermodel.findOne({ email });
-    console.log(userData);
+    
     if (!userData) {
       return res.status(500).json({ error: "User not found" });
     }
