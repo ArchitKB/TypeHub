@@ -1,11 +1,7 @@
-import React, { useState} from 'react';
-
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
-import {Link} from "react-router-dom"
-
-
-
+import { Link } from 'react-router-dom';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -24,7 +20,7 @@ const Signup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch('http://localhost:8080/login', {
+    fetch('http://localhost:8080/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -34,12 +30,15 @@ const Signup = () => {
       .then(response => response.json())
       .then(data => {
         console.log('Response from server:', data);
-        navigate('/login');
+        if (data.message === 'User registered successfully') {
+          navigate('/login');
+        }
       })
       .catch(error => {
         console.error('Error:', error);
       });
   };
+
 
   return (
     <section className="vh-100 bg-image">

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import keypad from "./keypad.jpg";
 import { useNavigate } from 'react-router-dom';
 
-export default function Login() {
+import keypad from './keypad.jpg';
+export default function Login () {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
@@ -13,12 +13,13 @@ export default function Login() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    console.log(formData)
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch('http://localhost:8080/createuser', {
+    fetch('http://localhost:8080/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -28,22 +29,23 @@ export default function Login() {
       .then(response => response.json())
       .then(data => {
         console.log('Response from server:', data);
-        navigate="/"
+        if (data.success) {
+          navigate('/');
+        }
       })
       .catch(error => {
         console.error('Error:', error);
       });
   };
-
   const sectionStyle = {
     backgroundColor: '#9A616D',
     height: '100vh'
   };
 
-  const imgStyle = {
-    borderRadius: '1rem 0 0 1rem',
-    maxWidth: '100%'
-  };
+  // const imgStyle = {
+  //   borderRadius: '1rem 0 0 1rem',
+  //   maxWidth: '100%'
+  // };
 
   return (
     <section style={sectionStyle}>
@@ -71,12 +73,12 @@ export default function Login() {
                       <h5 className="fw-normal mb-3 pb-3" style={{ letterSpacing: '1px' }}>Sign into your account</h5>
 
                       <div className="form-outline mb-4">
-                        <input type="email" id="form2Example17" className="form-control form-control-lg" onChange={handleChange}/>
+                        <input name="email" type="email" id="form2Example17" className="form-control form-control-lg" onChange={handleChange}/>
                         <label className="form-label" htmlFor="form2Example17" name="email">Email address</label>
                       </div>
 
                       <div className="form-outline mb-4">
-                        <input type="password" id="form2Example27" className="form-control form-control-lg" onChange={handleChange}/>
+                        <input name="password" type="password" id="form2Example27" className="form-control form-control-lg" onChange={handleChange}/>
                         <label className="form-label" htmlFor="form2Example27" name="password">Password</label>
                       </div>
 
