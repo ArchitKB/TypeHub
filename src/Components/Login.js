@@ -1,9 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import keypad from "./keypad.jpg";
-
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    fetch('http://localhost:8080/createuser', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Response from server:', data);
+        navigate="/"
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  };
+
   const sectionStyle = {
     backgroundColor: '#9A616D',
     height: '100vh'
@@ -25,15 +56,14 @@ export default function Login() {
                   <img
                     src={keypad}
                     alt="login form"
-                    
-                    style={{width:'480px',height:'520.5px ' , margin:'25px 0px 5px 5px'}}
+                    style={{ width: '480px', height: '520.5px', margin: '25px 0px 5px 5px' }}
                   />
                 </div>
                 <div className="col-md-6 col-lg-7 d-flex align-items-center">
                   <div className="card-body p-4 p-lg-5 text-black">
 
-                    <form>
-                      <div className="d-flex align-items-center mb-3 pb-1">
+                    <form onSubmit={handleSubmit}>
+                    <div className="d-flex align-items-center mb-3 pb-1">
                         <i className="fas fa-cubes fa-2x me-3" style={{ color: '#ff6219' }}></i>
                         <span className="h1 fw-bold mb-0"></span>
                       </div>
@@ -41,17 +71,17 @@ export default function Login() {
                       <h5 className="fw-normal mb-3 pb-3" style={{ letterSpacing: '1px' }}>Sign into your account</h5>
 
                       <div className="form-outline mb-4">
-                        <input type="email" id="form2Example17" className="form-control form-control-lg" />
-                        <label className="form-label" htmlFor="form2Example17">Email address</label>
+                        <input type="email" id="form2Example17" className="form-control form-control-lg" onChange={handleChange}/>
+                        <label className="form-label" htmlFor="form2Example17" name="email">Email address</label>
                       </div>
 
                       <div className="form-outline mb-4">
-                        <input type="password" id="form2Example27" className="form-control form-control-lg" />
-                        <label className="form-label" htmlFor="form2Example27">Password</label>
+                        <input type="password" id="form2Example27" className="form-control form-control-lg" onChange={handleChange}/>
+                        <label className="form-label" htmlFor="form2Example27" name="password">Password</label>
                       </div>
 
                       <div className="pt-1 mb-4">
-                        <button className="btn btn-dark btn-lg btn-block" type="button">Login</button>
+                        <button className="btn btn-dark btn-lg btn-block" type="submit">Login</button>
                       </div>
 
                       <a className="small text-muted" href="#!">Forgot password?</a>

@@ -2,6 +2,7 @@ import React, { useState} from 'react';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
+import {Link} from "react-router-dom"
 
 
 
@@ -110,7 +111,7 @@ const Signup = () => {
                       <button type="submit" className="btn btn-success btn-block btn-lg" style={{ background: 'linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1))' }}>Register</button>
                     </div>
 
-                    <p className="text-center text-muted mt-5 mb-0">Have already an account? <a href="/login" className="fw-bold text-body"><u>Login here</u></a></p>
+                    <p className="text-center text-muted mt-5 mb-0">Have already an account? <Link to="/login" className="fw-bold text-body"><u>Login here</u></Link></p>
                   </form>
                 </div>
               </div>
