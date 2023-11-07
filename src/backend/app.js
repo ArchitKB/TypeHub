@@ -16,7 +16,7 @@ db.once('open', function () {
   console.log("MongoDB is connected");
 });
 
-app.post('/login', async (req, res) => {
+app.post('/signup', async (req, res) => {
   const data = req.body;
   try {
     const user = new usermodel(data);
@@ -26,22 +26,25 @@ app.post('/login', async (req, res) => {
    res.status(500).json({ error: 'Internal server error' });
   }
 });
-app.post('/createuser', async (req, res) => {
-  let email=req.body.email
-  const password = req.body
- try {
-  let userData=await usermodel.findOne({email})
-  if(!userData){
-    return res.status(500).json({ error: "Try login with correct credential" });
+
+app.post('/login', async (req, res) => {
+  console.log(req.body)
+  let email = req.body.email;
+  const password = req.body.password;
+  try {
+    let userData = await usermodel.findOne({ email });
+    console.log(userData);
+    if (!userData) {
+      return res.status(500).json({ error: "User not found" });
+    }
+    if (password !== userData.password) {
+      return res.status(500).json({ error: "Incorrect password" });
+    }
+    res.json({ success: true, message: 'Login successful' });
+  } catch (error) {
+    console.log("Error:", error);
+    res.status(500).json({ error: 'Internal server error' });
   }
-  if(req.body.password!==userData.password){
-    return res.status(500).json({ error: "Try login with correct credentials" });
-  }
-  res.send("success:true");
- } catch (error) {
-  console.log("error");
-  res.json("success:false")
- }
 });
 
 app.listen(8080, () => {
