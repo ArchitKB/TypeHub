@@ -13,7 +13,7 @@ export default function Login () {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    console.log(formData)
+    
   };
 
   const handleSubmit = (e) => {
@@ -32,11 +32,15 @@ export default function Login () {
         if (data.success) {
           navigate('/');
         }
+        else{
+          alert("Enter valid credentials");
+        }
       })
       .catch(error => {
         console.error('Error:', error);
       });
   };
+
   const sectionStyle = {
     backgroundColor: '#9A616D',
     height: '100vh'
