@@ -30,6 +30,7 @@ export default function Login () {
       .then(data => {
         console.log('Response from server:', data);
         if (data.success) {
+          localStorage.setItem("authtoken",data.authtoken)
           navigate('/');
         }
         else{

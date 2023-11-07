@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const { body, validationResult } = require('express-validator');
 const usermodel = require("./models/usermodel");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken")
 
 const app = express();
 
@@ -18,9 +19,11 @@ db.once('open', function () {
   console.log("MongoDB is connected");
 });
 
+const jwtsecret = "MynameisAyushKumar"
+
 app.post('/signup', [
   body('email').isEmail(),
-  body('name').isLength({ min: 5 }),
+  body('name').isLength({ min: 6 }),
   body('password').isLength({ min: 5 }).withMessage('Password must be at least 5 characters long')
 ], async (req, res) => {
   const errors = validationResult(req);
@@ -71,14 +74,15 @@ app.post('/login', [
     if (!isPasswordValid) {
       return res.status(500).json({ error: "Incorrect password" });
     }
+    
+    const token = jwt.sign({ id: userData.id }, jwtsecret, { expiresIn: '10h' });
 
-    res.json({ success: true, message: 'Login successful' });
+    res.json({ success: true, message: 'Login successful', token });
   } catch (error) {
     console.log("Error:", error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
-
 
 app.listen(8080, () => {
   console.log("Server is running on port: 8080");

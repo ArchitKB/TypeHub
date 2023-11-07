@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "./Components/Header";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Import Routes
-
+import User from "./fontend/User";
 
 import Login from "./Components/Login";
 import Signup from "./Components/Signup";
@@ -13,7 +13,7 @@ export default function App(){
                 
                 <Routes>
                 <Route path="/" element={<Header/>}/>
-
+                <Route path="/user" element={<User/>}/>
                     <Route path="/login" element={<Login/>}/> {/* Use "path" instead of "exact path" */}
                     <Route path="/signup" element={<Signup/>}/>
                 </Routes>
