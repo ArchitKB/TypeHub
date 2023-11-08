@@ -23,7 +23,7 @@ const jwtsecret = "MynameisAyushKumar"
 
 app.post('/signup', [
   body('email').isEmail(),
-  body('name').isLength({ min: 6 }),
+  body('name').isLength({ min: 5 }),
   body('password').isLength({ min: 5 }).withMessage('Password must be at least 5 characters long')
 ], async (req, res) => {
   const errors = validationResult(req);
