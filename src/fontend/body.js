@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
+import 'bootstrap/dist/css/bootstrap.min.css'; 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserPlus, faUserMinus } from '@fortawesome/free-solid-svg-icons';
+
 
 // Styled Components
 const BodyContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -62,11 +66,37 @@ const StartButton = styled.button`
   }
 `;
 
+const FriendRequestButton = styled.button`
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+`;
+
+const FriendIcon = styled(FontAwesomeIcon)`
+  margin-right: 5px;
+`;
+
+const AddFriendButton = styled(FriendRequestButton)`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+`;
+
 // React Component
 const TypingPracticeBody = () => {
   const [timer, setTimer] = useState(null);
   const [difficulty, setDifficulty] = useState('easy');
   const [practiceText, setPracticeText] = useState('');
+  const [friendRequests, setFriendRequests] = useState([]);
+  const [userProfiles, setUserProfiles] = useState([]);
 
   const startTimer = (minutes) => {
     const milliseconds = minutes * 60 * 1000;
@@ -84,9 +114,9 @@ const TypingPracticeBody = () => {
   }, [timer]);
 
   useEffect(() => {
-    // Trigger action when difficulty changes
+    
     console.log(`Difficulty changed to: ${difficulty}`);
-    // Add your action here
+   
   }, [difficulty]);
 
   useEffect(() => {
@@ -104,6 +134,17 @@ const TypingPracticeBody = () => {
   const handleStart = () => {
     // Add any additional actions you want to perform when the "Start" button is clicked
     console.log('Start button clicked');
+  };
+
+  const sendFriendRequest = () => {
+    // Simulating sending a friend request
+    setFriendRequests([...friendRequests, { id: friendRequests.length + 1, name: 'Friend' }]);
+  };
+
+  const removeFriendRequest = (id) => {
+    // Simulating removing a friend request
+    const updatedRequests = friendRequests.filter((request) => request.id !== id);
+    setFriendRequests(updatedRequests);
   };
 
   return (
@@ -157,7 +198,25 @@ const TypingPracticeBody = () => {
         onChange={(e) => setPracticeText(e.target.value)}
       />
 
-      <StartButton onClick={handleStart}>Start</StartButton>
+      <AddFriendButton onClick={sendFriendRequest}>
+        <FriendIcon icon={faUserPlus} />
+        Add Friend
+      </AddFriendButton>
+
+      <div>
+        <h2>Friend Requests</h2>
+        <ul>
+          {friendRequests.map((request) => (
+            <li key={request.id}>
+              {request.name}
+              <FriendRequestButton onClick={() => removeFriendRequest(request.id)}>
+                <FriendIcon icon={faUserMinus} />
+                Remove Friend
+              </FriendRequestButton>
+            </li>
+          ))}
+        </ul>
+      </div>
     </BodyContainer>
   );
 };

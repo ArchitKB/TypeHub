@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { FaGithub } from 'react-icons/fa';
 
 // Styled Components
 const FooterContainer = styled.div`
@@ -51,7 +52,7 @@ const Footer = () => {
     <FooterContainer>
       <TeamName>Tech_geeks Team</TeamName>
       <GitHubLink>
-        <img src="/images/github-logo.png" alt="GitHub Logo" width="30" height="30" />
+        <FaGithub size={30} />
       </GitHubLink>
       <HamburgerIcon onClick={toggleNames}>
         ☰
