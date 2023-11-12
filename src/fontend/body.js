@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import 'bootstrap/dist/css/bootstrap.min.css'; 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserPlus, faUserMinus } from '@fortawesome/free-solid-svg-icons';
-
 
 // Styled Components
 const BodyContainer = styled.div`
@@ -60,6 +59,7 @@ const StartButton = styled.button`
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  margin-top: 20px;
 
   &:hover {
     background-color: #218838;
@@ -97,6 +97,7 @@ const TypingPracticeBody = () => {
   const [practiceText, setPracticeText] = useState('');
   const [friendRequests, setFriendRequests] = useState([]);
   const [userProfiles, setUserProfiles] = useState([]);
+  const [timeUp, setTimeUp] = useState(false);
 
   const startTimer = (minutes) => {
     const milliseconds = minutes * 60 * 1000;
@@ -114,13 +115,10 @@ const TypingPracticeBody = () => {
   }, [timer]);
 
   useEffect(() => {
-    
     console.log(`Difficulty changed to: ${difficulty}`);
-   
   }, [difficulty]);
 
   useEffect(() => {
-    // Trigger action when timer reaches 0
     if (timer === 0) {
       console.log('Timer reached 0. Perform action here.');
       // Add your action here
@@ -132,40 +130,34 @@ const TypingPracticeBody = () => {
   };
 
   const handleStart = () => {
-    // Add any additional actions you want to perform when the "Start" button is clicked
     console.log('Start button clicked');
   };
 
   const sendFriendRequest = () => {
-    // Simulating sending a friend request
     setFriendRequests([...friendRequests, { id: friendRequests.length + 1, name: 'Friend' }]);
   };
 
   const removeFriendRequest = (id) => {
-    // Simulating removing a friend request
     const updatedRequests = friendRequests.filter((request) => request.id !== id);
     setFriendRequests(updatedRequests);
   };
 
   return (
     <BodyContainer>
+    {timer !== null && (
+        <TimerContainer>
+          {Math.floor(timer / (60 * 1000))}:{Math.floor((timer % (60 * 1000)) / 1000)}
+        </TimerContainer>
+      )}
+
       <TimerContainer>
-        <TimerButton
-          className="btn btn-primary"
-          onClick={() => startTimer(1)}
-        >
+        <TimerButton className="btn btn-primary" onClick={() => startTimer(1)}>
           1 min
         </TimerButton>
-        <TimerButton
-          className="btn btn-primary"
-          onClick={() => startTimer(2)}
-        >
+        <TimerButton className="btn btn-primary" onClick={() => startTimer(2)}>
           2 min
         </TimerButton>
-        <TimerButton
-          className="btn btn-primary"
-          onClick={() => startTimer(5)}
-        >
+        <TimerButton className="btn btn-primary" onClick={() => startTimer(5)}>
           5 min
         </TimerButton>
       </TimerContainer>
@@ -198,12 +190,14 @@ const TypingPracticeBody = () => {
         onChange={(e) => setPracticeText(e.target.value)}
       />
 
+      <StartButton onClick={handleStart}>Start</StartButton>
+
       <AddFriendButton onClick={sendFriendRequest}>
         <FriendIcon icon={faUserPlus} />
         Add Friend
       </AddFriendButton>
 
-      <div>
+      <div style={{ marginTop: '20px' }}>
         <h2>Friend Requests</h2>
         <ul>
           {friendRequests.map((request) => (
