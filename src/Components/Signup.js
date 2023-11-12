@@ -19,7 +19,14 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+  
+    // Check if the password and confirmPassword match
+    if (formData.password !== formData.confirmPassword) {
+      console.error("Password and Repeat Password do not match");
+      // You can display an error message to the user here
+      return;
+    }
+  
     fetch('http://localhost:8080/signup', {
       method: 'POST',
       headers: {
@@ -38,7 +45,7 @@ const Signup = () => {
         console.error('Error:', error);
       });
   };
-
+  
 
   return (
     <section className="vh-100 bg-image">
