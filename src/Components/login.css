@@ -1,0 +1,14 @@
+.container{
+    margin-top: 8%;
+    padding-top: 3%;
+    width: 40%;
+    height: 65%;
+    background-color: rgb(255, 255, 255);
+    border-style: groove;
+    border-radius: 5%;
+    background-color: #19A7CE;
+}
+.whole{
+    text-align: left;
+    text-size-adjust: ;
+}
