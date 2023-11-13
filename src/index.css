@@ -1,3 +1,10 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+*{
+  margin: 0;
+  padding: 0;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -45,6 +52,12 @@ code {
   min-width: 400px;
 }
 
+.sub-header{
+  color: white;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
 .displayer{
   background-color: #146C94;
   display: flex;
@@ -68,6 +81,10 @@ code {
   background-color: #146C94;
   height: 10%;
   border-radius: 20px 20px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
 }
 
 .long{
@@ -80,9 +97,13 @@ code {
   border: none;
   outline: none;
   background-color: #F6F1F1;
+  font-family: monospace;
   font-size: 18px;
   width: 99%;
   height: 85%;
+  color: #F6F1F1;
+  caret-color: black;
+  overflow-wrap: break-word;
 }
 
 .red{
@@ -99,7 +120,7 @@ code {
   top:0;
   left:4px;
   font-size: 18px;
-  width: 98%;
+  width: 99%;
   height: 80%;
   position: absolute;
   text-align: left;
@@ -108,14 +129,17 @@ code {
   user-select: none;
   pointer-events: none;
   color: gray;
+  overflow-wrap: break-word;
 }
 
 .col-red{
-  color: red;
+  background-color: lightcoral;
+  color: black;
 }
 
 .col-green{
-  color: green;
+  background-color: lightgreen;
+  color: black;
 }
 
 .super-list{
@@ -130,6 +154,10 @@ code {
 
 .guide-text{
   color: cadetblue;
+}
+
+.dropup{
+  color: black;
 }
 
 /* Header.css */

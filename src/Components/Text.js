@@ -1,31 +1,78 @@
 import React, { useState } from "react";
-import content from "./Typing-content";
+import content, { parcedCont } from "./Typing-content";
 
 //test comment
 
-var para = content[Math.floor(content.length * Math.random())];
+var random = Math.floor(content.length * Math.random());
+var parsed = parcedCont[random];
+var ind = 0;
+var wordIndex = -1;
+var lastWordIndex = -2;
+var correctWordsNow = 0;
+var correctWordsSoFar = 0;
+var errors = 0;
 
-function Text() {
+function Text(props) {
   function updateText(e) {
+    props.setRunningFlag(true);
     var input = e.target.value;
-    var len = input.length;
-    var char = input[len - 1];
+    if (!input) {
+      setState([]);
+      wordIndex = -1;
+      lastWordIndex = -1;
+      return;
+    }
+    var len = parsed.length;
+    var parsedInput = input.split(" ").filter(Boolean);
+    ind = parsedInput.length - 1;
+    wordIndex = parsedInput[ind].length - 1;
+    var char = parsedInput[ind][wordIndex];
 
-    if (input === para) {
-      para = content[Math.floor(content.length * Math.random())];
+    correctWordsNow = 0;
+    for (var i = 0; i < parsedInput.length; i++) {
+      if (parsed[i] === parsedInput[i]) {
+        correctWordsNow++;
+      }
+    }
+
+    if (
+      parsedInput.length === len &&
+      lastWordIndex >= parsed[len - 1].length - 1
+    ) {
+      var newRandom = Math.floor(content.length * Math.random());
+      parsed = parcedCont[newRandom];
+      ind = 0;
+      wordIndex = -1;
+      lastWordIndex = -2;
+      correctWordsSoFar += correctWordsNow;
       e.target.value = "";
       setState([]);
-      input = "";
-    } else if (len < state.length) {
+    } else if (input.length < state.length) {
       setState(state.slice(0, -1));
-    } else if (char !== para[len - 1]) {
-      setState([...state, { content: char, color: "col-red", id: len }]);
+    } else if (
+      lastWordIndex === wordIndex &&
+      parsedInput[ind] === parsed[ind]
+    ) {
+      setState([...state, { content: " ", color: "col-green", id: input }]);
+    } else if (lastWordIndex === wordIndex) {
+      setState([...state, { content: " ", color: "col-red", id: input }]);
+      errors++;
+    } else if (
+      wordIndex > parsed[ind].length ||
+      char !== parsed[ind][wordIndex]
+    ) {
+      setState([...state, { content: char, color: "col-red", id: input }]);
+      errors++;
     } else {
-      setState([...state, { content: char, color: "col-green", id: len }]);
+      setState([...state, { content: char, color: "col-green", id: input }]);
     }
+
+    props.setTotalCorrectWords(correctWordsSoFar + correctWordsNow);
+    lastWordIndex = wordIndex;
   }
 
   var [state, setState] = useState([]);
+
   return (
     <div className="long">
       <textarea className="text" onInput={updateText} />
@@ -37,7 +84,9 @@ function Text() {
             </li>
           ))}
           <li className="guiding-text">
-            {para.substring(state.length, para.length)}
+            {parsed[ind].slice(wordIndex + 1, parsed[ind].length) +
+              " " +
+              parsed.slice(ind + 1, parsed.length).join(" ")}
           </li>
         </ul>
       </div>
