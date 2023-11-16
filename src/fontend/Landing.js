@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './Landing.css'; // Import a separate CSS file for styling
 
 const Landing = () => {
   return (
-    <div className="container mt-5">
+    <div className="landing-container">
       <h1 className="text-center mb-5">Typing Master</h1>
 
       <div className="row">

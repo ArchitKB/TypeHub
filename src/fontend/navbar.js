@@ -88,7 +88,7 @@ function BasicExample() {
         </button>
 
         {/* Logout Icon with Link to Landing Page */}
-        <Link to="/landing"> {/* Change '/landing' to the actual URL of your landing page */}
+        <Link to="/"> {/* Change '/landing' to the actual URL of your landing page */}
           <button onClick={handleLogoutClick}>
             <BsBoxArrowRight size={30} />
           </button>

@@ -1,0 +1,10 @@
+/* Landing.css */
+.landing-container {
+   /* background-image: url('path/to/your/background-image.jpg'); Replace with your image path */
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh; /* Ensure the container covers the entire viewport height */
+  }
+  
+  /* Add any additional styling for the container as needed */
+  
