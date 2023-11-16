@@ -1,28 +1,41 @@
+// BasicExample.js
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { BsFillPersonFill, BsPencilSquare, BsBoxArrowRight } from 'react-icons/bs'; // Import icons
+import { BsFillPersonFill, BsPencilSquare, BsBoxArrowRight } from 'react-icons/bs';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import AccountPage from './AccountPage';
+import Profile from './profile';
+import Landing from './Landing';
 
 function BasicExample() {
-  const [showAccountPage, setShowAccountPage] = useState(false);
-
-  const handleAccountClick = () => {
-    // Toggle the visibility of the AccountPage
-    setShowAccountPage(!showAccountPage);
-  };
+  const [showCreateAccount, setShowCreateAccount] = useState(false);
+  const [showProfile, setShowProfile] = useState(false);
 
   const handleEditProfileClick = () => {
     // Handle click for Edit Profile
     console.log('Edit Profile clicked');
+    // Add your logic for editing the profile directly here
   };
 
   const handleLogoutClick = () => {
     // Handle click for Logout
     console.log('Logout clicked');
+    // Use Link to navigate to the landing page
+    // Do not use window.location.href for React Router navigation
+  };
+
+  const handleAccountClick = () => {
+    // Toggle the visibility of the Profile component
+    setShowProfile(!showProfile);
+  };
+
+  const handleCreateAccountClick = () => {
+    // Handle click for Create Account
+    console.log('Create Account clicked');
+    // Add your logic for creating an account directly here
   };
 
   return (
@@ -58,19 +71,29 @@ function BasicExample() {
           <BsFillPersonFill size={30} />
         </button>
 
+        {/* Conditionally render Profile component */}
+        {showProfile && <Profile />}
+
+        {/* Conditionally render Create Account functionality */}
+        {showCreateAccount && (
+          <button className="mb-3" onClick={handleCreateAccountClick}>
+            {/* Adjust the icon or text for Create Account */}
+            Create Account
+          </button>
+        )}
+
         {/* Edit Profile Icon */}
         <button className="mb-3" onClick={handleEditProfileClick}>
           <BsPencilSquare size={30} />
         </button>
 
-        {/* Logout Icon */}
-        <button onClick={handleLogoutClick}>
-          <BsBoxArrowRight size={30} />
-        </button>
+        {/* Logout Icon with Link to Landing Page */}
+        <Link to="/landing"> {/* Change '/landing' to the actual URL of your landing page */}
+          <button onClick={handleLogoutClick}>
+            <BsBoxArrowRight size={30} />
+          </button>
+        </Link>
       </div>
-
-      {/* Account Page */}
-      {showAccountPage && <AccountPage />}
     </>
   );
 }

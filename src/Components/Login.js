@@ -34,7 +34,7 @@ export default function Login () {
         console.log('Response from server:', data);
         if (data.success) {
           localStorage.setItem("authtoken",data.authtoken)
-          navigate('/');
+          navigate('/user');
         }
         else{
           alert("Enter valid credentials");
