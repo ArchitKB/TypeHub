@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { FaGithub } from 'react-icons/fa';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { FaGithub } from "react-icons/fa";
 
 // Styled Components
 const FooterContainer = styled.div`
@@ -26,7 +26,7 @@ const HamburgerIcon = styled.div`
 `;
 
 const MemberNames = styled.div`
-  display: ${props => (props.showNames ? 'block' : 'none')};
+  display: ${(props) => (props.showNames ? "block" : "none")};
 `;
 
 const ContactInfo = styled.div`
@@ -54,9 +54,7 @@ const Footer = () => {
       <GitHubLink>
         <FaGithub size={30} />
       </GitHubLink>
-      <HamburgerIcon onClick={toggleNames}>
-        ☰
-      </HamburgerIcon>
+      <HamburgerIcon onClick={toggleNames}>☰</HamburgerIcon>
       <MemberNames showNames={showNames}>
         <div>Member Name 1</div>
         <div>Member Name 2</div>

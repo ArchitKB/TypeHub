@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserPlus, faUserMinus } from '@fortawesome/free-solid-svg-icons';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserPlus, faUserMinus } from "@fortawesome/free-solid-svg-icons";
 
 // Styled Components
 const BodyContainer = styled.div`
@@ -93,8 +93,8 @@ const AddFriendButton = styled(FriendRequestButton)`
 // React Component
 const TypingPracticeBody = () => {
   const [timer, setTimer] = useState(null);
-  const [difficulty, setDifficulty] = useState('easy');
-  const [practiceText, setPracticeText] = useState('');
+  const [difficulty, setDifficulty] = useState("easy");
+  const [practiceText, setPracticeText] = useState("");
   const [friendRequests, setFriendRequests] = useState([]);
   const [userProfiles, setUserProfiles] = useState([]);
   const [timeUp, setTimeUp] = useState(false);
@@ -120,7 +120,7 @@ const TypingPracticeBody = () => {
 
   useEffect(() => {
     if (timer === 0) {
-      console.log('Timer reached 0. Perform action here.');
+      console.log("Timer reached 0. Perform action here.");
       // Add your action here
     }
   }, [timer]);
@@ -130,23 +130,29 @@ const TypingPracticeBody = () => {
   };
 
   const handleStart = () => {
-    console.log('Start button clicked');
+    console.log("Start button clicked");
   };
 
   const sendFriendRequest = () => {
-    setFriendRequests([...friendRequests, { id: friendRequests.length + 1, name: 'Friend' }]);
+    setFriendRequests([
+      ...friendRequests,
+      { id: friendRequests.length + 1, name: "Friend" },
+    ]);
   };
 
   const removeFriendRequest = (id) => {
-    const updatedRequests = friendRequests.filter((request) => request.id !== id);
+    const updatedRequests = friendRequests.filter(
+      (request) => request.id !== id
+    );
     setFriendRequests(updatedRequests);
   };
 
   return (
     <BodyContainer>
-    {timer !== null && (
+      {timer !== null && (
         <TimerContainer>
-          {Math.floor(timer / (60 * 1000))}:{Math.floor((timer % (60 * 1000)) / 1000)}
+          {Math.floor(timer / (60 * 1000))}:
+          {Math.floor((timer % (60 * 1000)) / 1000)}
         </TimerContainer>
       )}
 
@@ -164,20 +170,20 @@ const TypingPracticeBody = () => {
 
       <DifficultyContainer>
         <DifficultyButton
-          className={`btn btn-${difficulty === 'easy' ? 'success' : 'light'}`}
-          onClick={() => handleDifficultyChange('easy')}
+          className={`btn btn-${difficulty === "easy" ? "success" : "light"}`}
+          onClick={() => handleDifficultyChange("easy")}
         >
           Easy
         </DifficultyButton>
         <DifficultyButton
-          className={`btn btn-${difficulty === 'medium' ? 'warning' : 'light'}`}
-          onClick={() => handleDifficultyChange('medium')}
+          className={`btn btn-${difficulty === "medium" ? "warning" : "light"}`}
+          onClick={() => handleDifficultyChange("medium")}
         >
           Medium
         </DifficultyButton>
         <DifficultyButton
-          className={`btn btn-${difficulty === 'hard' ? 'danger' : 'light'}`}
-          onClick={() => handleDifficultyChange('hard')}
+          className={`btn btn-${difficulty === "hard" ? "danger" : "light"}`}
+          onClick={() => handleDifficultyChange("hard")}
         >
           Hard
         </DifficultyButton>
@@ -197,13 +203,15 @@ const TypingPracticeBody = () => {
         Add Friend
       </AddFriendButton>
 
-      <div style={{ marginTop: '20px' }}>
+      <div style={{ marginTop: "20px" }}>
         <h2>Friend Requests</h2>
         <ul>
           {friendRequests.map((request) => (
             <li key={request.id}>
               {request.name}
-              <FriendRequestButton onClick={() => removeFriendRequest(request.id)}>
+              <FriendRequestButton
+                onClick={() => removeFriendRequest(request.id)}
+              >
                 <FriendIcon icon={faUserMinus} />
                 Remove Friend
               </FriendRequestButton>
