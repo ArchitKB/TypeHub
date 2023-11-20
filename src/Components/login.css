@@ -1,14 +1,19 @@
 .container{
-    margin-top: 8%;
-    padding-top: 3%;
-    width: 40%;
-    height: 65%;
-    background-color: rgb(255, 255, 255);
+    margin-top: 4%;
+    padding-top: -7%;
+    width: 27%;
+    height: 40%;
     border-style: groove;
-    border-radius: 5%;
+    border-radius: 6%;
     background-color: #19A7CE;
 }
 .whole{
     text-align: left;
     text-size-adjust: ;
+}
+.btn{
+    color:black;
+}
+.btn:hover{
+    color:white;
 }

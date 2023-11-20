@@ -1,10 +1,37 @@
 /* Landing.css */
 .landing-container {
-   /* background-image: url('path/to/your/background-image.jpg'); Replace with your image path */
+   /* background-image: url('./img.jpg');  */
     background-size: cover;
     background-position: center;
-    min-height: 100vh; /* Ensure the container covers the entire viewport height */
+    min-height: 100vh; 
+    /* display: flex; */
+    /* Ensure the container covers the entire viewport height */
   }
+.box1{
+  border-radius:8px;
+  background-color: #19A7CE;
+  height: 65vh;
+}
+.box2{
+  height: 75vh;
+  border-radius:8px;
+}
+.card1{
+  position: absolute;
+  margin-left: 50%;
+  width: 25%;
+  /* top: 50%; */
+  transform: translateY(6%);
+
+}
+.card2{
+  position: absolute;
+  margin-left: 65%;
+  width: 25%;
+}
+.custom-image{
   
-  /* Add any additional styling for the container as needed */
+  height:75vh;
+  width: 75vh;
+}
   
