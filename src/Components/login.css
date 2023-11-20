@@ -9,6 +9,7 @@
 }
 .whole{
     text-align: left;
+<<<<<<< Updated upstream
     text-size-adjust: ;
 }
 .btn{
@@ -16,4 +17,9 @@
 }
 .btn:hover{
     color:white;
+=======
+}
+.form-label{
+    text-align: justify;
+>>>>>>> Stashed changes
 }

@@ -72,7 +72,7 @@ export default function Login () {
                       <h2 className="text-uppercase text-center mb-5">Sign in</h2>
                       <div className="form-outline mb-4">
                         <input name="email" type="email" id="form2Example17" className="form-control form-control-lg" onChange={handleChange}/>
-                        <label className="form-label" htmlFor="form2Example17" name="email">Email address</label>
+                        <label className="form-label " htmlFor="form2Example17"   name="email">Email address</label>
                       </div>
 
                       <div className="form-outline mb-4">
