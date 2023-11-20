@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import {
+  Dropdown,
+  ButtonGroup,
+  DropdownButton,
+  Modal,
+  Button,
+} from "react-bootstrap";
 
 function Displayer(props) {
   var [WPM, setWPM] = useState(0);
   var [WPMTimer, setWPMTimer] = useState(0);
   var [timer, setTimer] = useState(100);
+  var [curTime, setCurTime] = useState(timer);
 
   useEffect(() => {
     var intervalName;
@@ -15,12 +23,23 @@ function Displayer(props) {
       5000
     );
 
-    return () => clearInterval(intervalName);
-  }, []);
+    return () => {
+      setWPMTimer(0);
+      return clearInterval(intervalName);
+    };
+  }, [props.runningFlag]);
 
   useEffect(() => {
     setWPM(Math.floor((props.totalCorrectWords * 60) / WPMTimer));
   }, [WPMTimer]);
+
+  if (timer === 0) {
+    setTimer(curTime);
+    <Popup />;
+    props.setRunningFlag(false);
+    props.setErrors(0);
+    props.setTotalCharacters(0);
+  }
 
   return (
     <div className="displayer">
@@ -30,21 +49,30 @@ function Displayer(props) {
         <Timer
           setTimer={setTimer}
           timer={timer}
+          curTime={curTime}
           runningFlag={props.runningFlag}
           setRunningFlag={props.setRunningFlag}
         />
       ) : (
-        <Button timer={timer} setTimer={setTimer} />
+        <MyButton
+          timer={timer}
+          setTimer={setTimer}
+          curTime={curTime}
+          setCurTime={setCurTime}
+        />
       )}
-      <p>Errors</p>
-      <p>Accuracy</p>
+      <p>Errors: {props.errors}</p>
+      <p>
+        Accuracy:{" "}
+        {Math.floor(
+          (100 * (props.totalCharacters - props.errors)) / props.totalCharacters
+        ) + "%"}
+      </p>
     </div>
   );
 }
 
 function Timer(props) {
-  if (props.timer == 0) props.setRunningFlag(false);
-
   useEffect(() => {
     var intervalName = setInterval(
       () => props.setTimer((timer) => timer - 1),
@@ -69,53 +97,71 @@ function Timer(props) {
   );
 }
 
-function Button(props) {
-  var [curTime, setCurTime] = useState(props.timer);
-
-  var minutes = curTime / 60;
-  var seconds = curTime % 60;
+function MyButton(props) {
+  var minutes = props.curTime / 60;
+  var seconds = props.curTime % 60;
   function modifyTimer(e) {
     var time = e.target.getAttribute("time");
-    setCurTime(time);
+    props.setCurTime(time);
     props.setTimer(time);
   }
-  return (
-    <div class="btn-group dropup">
-      <button
-        type="button"
-        class="btn btn-secondary dropdown-toggle"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-      >
-        {Math.floor(minutes / 10) +
-          Math.floor(minutes % 10) +
-          ":" +
-          Math.floor(seconds / 10) +
-          (seconds % 10)}
-      </button>
 
-      <div class="dropdown-menu">
-        <p time="30" onClick={modifyTimer}>
-          00:30
-        </p>
-        <p time="60" onClick={modifyTimer}>
-          01:00
-        </p>
-        <p time="100" onClick={modifyTimer}>
-          01:40
-        </p>
-        <p time="120" onClick={modifyTimer}>
-          02:00
-        </p>
-        <p time="240" onClick={modifyTimer}>
-          04:00
-        </p>
-        <p time="300" onClick={modifyTimer}>
-          05:00
-        </p>
-      </div>
-    </div>
+  return (
+    <DropdownButton
+      as={ButtonGroup}
+      key={"up"}
+      id={"dropdown-button-drop-up"}
+      drop={"up"}
+      variant="secondary"
+      title={
+        Math.floor(minutes / 10) +
+        Math.floor(minutes % 10) +
+        ":" +
+        Math.floor(seconds / 10) +
+        (seconds % 10)
+      }
+    >
+      <Dropdown.Item eventKey="1" time="30" onClick={modifyTimer}>
+        00:30
+      </Dropdown.Item>
+      <Dropdown.Item eventKey="2" time="60" onClick={modifyTimer}>
+        01:00
+      </Dropdown.Item>
+      <Dropdown.Item eventKey="3" time="60" onClick={modifyTimer}>
+        01:40
+      </Dropdown.Item>
+      <Dropdown.Item eventKey="4" time="120" onClick={modifyTimer}>
+        02:00
+      </Dropdown.Item>
+      <Dropdown.Item eventKey="5" time="240" onClick={modifyTimer}>
+        04:00
+      </Dropdown.Item>
+      <Dropdown.Item eventKey="6" time="300" onClick={modifyTimer}>
+        05:00
+      </Dropdown.Item>
+    </DropdownButton>
+  );
+}
+
+function Popup(props) {
+  var [show, setShow] = useState(true);
+
+  var handleClose = () => setShow(false);
+  return (
+    <Modal show={show} onHide={handleClose}>
+      <Modal.Header closeButton>
+        <Modal.Title>Modal heading</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={handleClose}>
+          Close
+        </Button>
+        <Button variant="primary" onClick={handleClose}>
+          Save Changes
+        </Button>
+      </Modal.Footer>
+    </Modal>
   );
 }
 export default Displayer;

@@ -1,14 +1,18 @@
 // BasicExample.js
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import { BsFillPersonFill, BsPencilSquare, BsBoxArrowRight } from 'react-icons/bs';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Profile from './profile';
-import Landing from './Landing';
+import React, { useState } from "react";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import {
+  BsFillPersonFill,
+  BsPencilSquare,
+  BsBoxArrowRight,
+} from "react-icons/bs";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Profile from "./profile";
+import Landing from "./Landing";
 
 function BasicExample() {
   const [showCreateAccount, setShowCreateAccount] = useState(false);
@@ -16,13 +20,13 @@ function BasicExample() {
 
   const handleEditProfileClick = () => {
     // Handle click for Edit Profile
-    console.log('Edit Profile clicked');
+    console.log("Edit Profile clicked");
     // Add your logic for editing the profile directly here
   };
 
   const handleLogoutClick = () => {
     // Handle click for Logout
-    console.log('Logout clicked');
+    console.log("Logout clicked");
     // Use Link to navigate to the landing page
     // Do not use window.location.href for React Router navigation
   };
@@ -34,7 +38,7 @@ function BasicExample() {
 
   const handleCreateAccountClick = () => {
     // Handle click for Create Account
-    console.log('Create Account clicked');
+    console.log("Create Account clicked");
     // Add your logic for creating an account directly here
   };
 
@@ -53,7 +57,9 @@ function BasicExample() {
                 <NavDropdown.Item href="#action/3.2">
                   Another action
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.3">
+                  Something
+                </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#action/3.4">
                   Separated link
@@ -88,7 +94,9 @@ function BasicExample() {
         </button>
 
         {/* Logout Icon with Link to Landing Page */}
-        <Link to="/"> {/* Change '/landing' to the actual URL of your landing page */}
+        <Link to="/">
+          {" "}
+          {/* Change '/landing' to the actual URL of your landing page */}
           <button onClick={handleLogoutClick}>
             <BsBoxArrowRight size={30} />
           </button>

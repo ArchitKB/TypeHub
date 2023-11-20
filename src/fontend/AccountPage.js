@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 
 const AccountContainer = styled.div`
   display: flex;
@@ -38,11 +38,11 @@ const FormButton = styled.button`
 
 const AccountPage = () => {
   const [formData, setFormData] = useState({
-    userName: '',
-    age: '',
-    avgTypingScore: '',
-    maxTypingScore: '',
-    rank: '',
+    userName: "",
+    age: "",
+    avgTypingScore: "",
+    maxTypingScore: "",
+    rank: "",
   });
 
   const handleChange = (e) => {
@@ -56,7 +56,7 @@ const AccountPage = () => {
     // Add logic to handle form submission (e.g., send data to server, store in database, etc.)
 
     // For demonstration purposes, logging form data to console
-    console.log('Form data submitted:', formData);
+    console.log("Form data submitted:", formData);
   };
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import content, { parcedCont } from "./Typing-content";
 
 //test comment
@@ -10,18 +10,19 @@ var wordIndex = -1;
 var lastWordIndex = -2;
 var correctWordsNow = 0;
 var correctWordsSoFar = 0;
-var errors = 0;
 
 function Text(props) {
   function updateText(e) {
     props.setRunningFlag(true);
     var input = e.target.value;
+
     if (!input) {
       setState([]);
       wordIndex = -1;
       lastWordIndex = -1;
       return;
     }
+
     var len = parsed.length;
     var parsedInput = input.split(" ").filter(Boolean);
     ind = parsedInput.length - 1;
@@ -49,33 +50,56 @@ function Text(props) {
       setState([]);
     } else if (input.length < state.length) {
       setState(state.slice(0, -1));
-    } else if (
-      lastWordIndex === wordIndex &&
-      parsedInput[ind] === parsed[ind]
-    ) {
+    } else if (lastKeyPressed === " " && parsedInput[ind] === parsed[ind]) {
       setState([...state, { content: " ", color: "col-green", id: input }]);
-    } else if (lastWordIndex === wordIndex) {
+      props.setTotalCharacters(props.totalCharacters + 1);
+    } else if (lastKeyPressed === " ") {
       setState([...state, { content: " ", color: "col-red", id: input }]);
-      errors++;
+      props.setTotalCharacters(props.totalCharacters + 1);
+      props.setErrors(props.errors + 1);
     } else if (
       wordIndex > parsed[ind].length ||
       char !== parsed[ind][wordIndex]
     ) {
       setState([...state, { content: char, color: "col-red", id: input }]);
-      errors++;
+      props.setTotalCharacters(props.totalCharacters + 1);
+      props.setErrors(props.errors + 1);
     } else {
       setState([...state, { content: char, color: "col-green", id: input }]);
+      props.setTotalCharacters(props.totalCharacters + 1);
     }
 
     props.setTotalCorrectWords(correctWordsSoFar + correctWordsNow);
     lastWordIndex = wordIndex;
   }
 
+  function lastKey(e) {
+    setLastKeyPressed(e.key);
+  }
   var [state, setState] = useState([]);
+  var [lastKeyPressed, setLastKeyPressed] = useState("");
+  var box_ref = useRef();
 
+  useEffect(() => {
+    if (props.runningFlag === false) {
+      ind = 0;
+      wordIndex = -1;
+      box_ref.current.value = "";
+      lastWordIndex = -2;
+      setState([]);
+      props.setTotalCorrectWords(0);
+      var newRandom = Math.floor(content.length * Math.random());
+      parsed = parcedCont[newRandom];
+    }
+  }, [props.runningFlag]);
   return (
     <div className="long">
-      <textarea className="text" onInput={updateText} />
+      <textarea
+        className="text"
+        onInput={updateText}
+        ref={box_ref}
+        onKeyDown={lastKey}
+      />
       <div className="super">
         <ul className="super-list">
           {state.map((item) => (
