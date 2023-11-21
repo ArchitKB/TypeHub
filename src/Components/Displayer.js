@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./login.css"
 import {
   Dropdown,
   ButtonGroup,
@@ -107,6 +108,7 @@ function MyButton(props) {
   }
 
   return (
+    <div className="popup-button">
     <DropdownButton
       as={ButtonGroup}
       key={"up"}
@@ -120,7 +122,7 @@ function MyButton(props) {
         Math.floor(seconds / 10) +
         (seconds % 10)
       }
-    >
+    > <div className="popup">
       <Dropdown.Item eventKey="1" time="30" onClick={modifyTimer}>
         00:30
       </Dropdown.Item>
@@ -139,7 +141,9 @@ function MyButton(props) {
       <Dropdown.Item eventKey="6" time="300" onClick={modifyTimer}>
         05:00
       </Dropdown.Item>
+      </div>
     </DropdownButton>
+    </div>
   );
 }
 

@@ -16,3 +16,12 @@
 .btn{
   background-color: #146C94;
 }
+.popup{
+    background-color: #19A7CE;
+}
+.popup:hover{
+    background-color: #146C94;
+}
+.popup-button{
+    text-align: top;
+}
