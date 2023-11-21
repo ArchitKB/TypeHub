@@ -74,7 +74,7 @@ const Landing = () => {
                 <button className="btn btn-success">Login</button>
               </Link>
               <Link to="/signup" className="ms-2">
-                <button className="btn btn-outline-secondary">Register</button>
+                <button className="btn btn-success">Register</button>
               </Link>
             </div>
           </div>

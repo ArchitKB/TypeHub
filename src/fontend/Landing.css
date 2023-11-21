@@ -26,7 +26,7 @@
 }
 .card2{
   position: absolute;
-  margin-left: 65%;
+  margin-left: 70%;
   width: 25%;
 }
 .custom-image{
@@ -34,4 +34,6 @@
   height:75vh;
   width: 75vh;
 }
-  
+.btn:hover{
+ background-color: green;
+}
