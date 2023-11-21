@@ -32,10 +32,10 @@ function Header() {
 
         <div className="right-links">
           <animated.div style={linksAnimation} className="right">
-            <Link to="/signup"><button className="btn ">SignUp</button></Link>
+            <Link to="/signup"><button className="btn">SignUp</button></Link>
           </animated.div>
           <animated.div style={linksAnimation} className="right">
-            <Link to="/login"><button className="btn ">Login</button></Link>
+            <Link to="/login"><button className="btn">Login</button></Link>
           </animated.div>
         </div>
       </header>
