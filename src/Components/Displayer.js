@@ -15,6 +15,8 @@ function Displayer(props) {
   var [WPMTimer, setWPMTimer] = useState(0);
   var [timer, setTimer] = useState(100);
   var [curTime, setCurTime] = useState(timer);
+  var [showPopup, setShowPopup] = useState(false);
+  var [result, setResult] = useState([0, 0, 0]);
 
   useEffect(() => {
     var intervalName;
@@ -35,41 +37,52 @@ function Displayer(props) {
   }, [WPMTimer]);
 
   if (timer === 0) {
+    setResult([
+      WPM,
+      props.errors,
+      Math.floor(
+        (100 * (props.totalCharacters - props.errors)) / props.totalCharacters
+      ),
+    ]);
     setTimer(curTime);
-    <Popup />;
     props.setRunningFlag(false);
     props.setErrors(0);
     props.setTotalCharacters(0);
+    setShowPopup(true);
   }
 
   return (
-    <div className="displayer">
-      <p>WPM:{WPMTimer === 0 ? "---" : WPM}</p>
-      <p>Time:</p>
-      {props.runningFlag ? (
-        <Timer
-          setTimer={setTimer}
-          timer={timer}
-          curTime={curTime}
-          runningFlag={props.runningFlag}
-          setRunningFlag={props.setRunningFlag}
-        />
-      ) : (
-        <MyButton
-          timer={timer}
-          setTimer={setTimer}
-          curTime={curTime}
-          setCurTime={setCurTime}
-        />
-      )}
-      <p>Errors: {props.errors}</p>
-      <p>
-        Accuracy:{" "}
-        {Math.floor(
-          (100 * (props.totalCharacters - props.errors)) / props.totalCharacters
-        ) + "%"}
-      </p>
-    </div>
+    <>
+      {showPopup ? <Popup setShowPopup={setShowPopup} result={result} /> : null}
+      <div className="displayer">
+        <p>WPM:{WPMTimer === 0 ? "---" : WPM}</p>
+        <p>Time:</p>
+        {props.runningFlag ? (
+          <Timer
+            setTimer={setTimer}
+            timer={timer}
+            curTime={curTime}
+            runningFlag={props.runningFlag}
+            setRunningFlag={props.setRunningFlag}
+          />
+        ) : (
+          <MyButton
+            timer={timer}
+            setTimer={setTimer}
+            curTime={curTime}
+            setCurTime={setCurTime}
+          />
+        )}
+        <p>Errors: {props.errors}</p>
+        <p>
+          Accuracy:{" "}
+          {Math.floor(
+            (100 * (props.totalCharacters - props.errors)) /
+              props.totalCharacters
+          ) + "%"}
+        </p>
+      </div>
+    </>
   );
 }
 
@@ -150,19 +163,26 @@ function MyButton(props) {
 function Popup(props) {
   var [show, setShow] = useState(true);
 
-  var handleClose = () => setShow(false);
+  var handleClose = () => {
+    setShow(false);
+    props.setShowPopup(false);
+  };
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Modal heading</Modal.Title>
+        <Modal.Title>Results</Modal.Title>
       </Modal.Header>
-      <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+      <Modal.Body>
+        <h4>Words per minute:</h4>{" "}
+        <span className="result">{props.result[0]}</span> <br />
+        <h4>Errors:</h4> <span className="result">{props.result[1]}</span>{" "}
+        <br />
+        <h4>Accuracy:</h4> <span className="result">{props.result[2]}</span>{" "}
+        <br />
+      </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
-          Close
-        </Button>
         <Button variant="primary" onClick={handleClose}>
-          Save Changes
+          Okay
         </Button>
       </Modal.Footer>
     </Modal>
