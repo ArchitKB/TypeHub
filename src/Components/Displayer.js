@@ -64,6 +64,8 @@ function Displayer(props) {
             curTime={curTime}
             runningFlag={props.runningFlag}
             setRunningFlag={props.setRunningFlag}
+            setErrors={props.setErrors}
+            setTotalCharacters={props.setTotalCharacters}
           />
         ) : (
           <MyButton
@@ -96,12 +98,18 @@ function Timer(props) {
     return () => clearInterval(intervalName);
   }, []);
 
+  function resetter() {
+    props.setRunningFlag(false);
+    props.setErrors(0);
+    props.setTotalCharacters(0);
+    props.setTimer(props.curTime);
+  }
   var minutes = Math.floor(props.timer / 60);
 
   var seconds = props.timer % 60;
 
   return (
-    <p>
+    <p onClick={resetter}>
       {Math.floor(minutes / 10) +
         (minutes % 10) +
         ":" +

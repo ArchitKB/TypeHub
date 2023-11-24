@@ -99,6 +99,8 @@ function Text(props) {
         onInput={updateText}
         ref={box_ref}
         onKeyDown={lastKey}
+        spellCheck="false"
+        autoComplete="off"
       />
       <div className="super">
         <ul className="super-list">
