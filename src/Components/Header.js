@@ -3,7 +3,7 @@ import { useSpring, animated } from "react-spring";
 import logo from "./logo-removebg-preview.png";
 import { Link } from "react-router-dom";
 import Body from "./Body";
-import "./login.css"
+import "./login.css";
 function Header() {
   // Animation for the logo
   const logoAnimation = useSpring({
@@ -19,6 +19,10 @@ function Header() {
     config: { duration: 1000, delay: 200 },
   });
 
+  function backToHome() {
+    window.location.href = "/";
+  }
+
   return (
     <div>
       <header className="header">
@@ -27,15 +31,22 @@ function Header() {
           src={logo}
           alt="logo"
           style={logoAnimation}
+          onClick={backToHome}
         />
-        <animated.h1 style={logoAnimation}>TypeHub</animated.h1>
+        <animated.h1 style={logoAnimation} onClick={backToHome}>
+          TypeHub
+        </animated.h1>
 
         <div className="right-links">
           <animated.div style={linksAnimation} className="right">
-            <Link to="/signup"><button className="btn">SignUp</button></Link>
+            <Link to="/signup">
+              <button className="btn">SignUp</button>
+            </Link>
           </animated.div>
           <animated.div style={linksAnimation} className="right">
-            <Link to="/login"><button className="btn">Login</button></Link>
+            <Link to="/login">
+              <button className="btn">Login</button>
+            </Link>
           </animated.div>
         </div>
       </header>

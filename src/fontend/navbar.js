@@ -45,7 +45,7 @@ function BasicExample() {
 
   return (
     <>
-      <Navbar expand="lg" className="bg-body-tertiary align-top">
+      <Navbar expand="lg" className="bg-body-tertiary align-top no-padding">
         <Container className="no-margin wide">
           <Navbar.Brand href="./Landing.js">Type Hub</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />

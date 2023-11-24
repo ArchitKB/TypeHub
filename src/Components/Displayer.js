@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./login.css"
+import "./login.css";
 import {
   Dropdown,
   ButtonGroup,
@@ -122,40 +122,42 @@ function MyButton(props) {
 
   return (
     <div className="popup-button">
-    <DropdownButton
-      as={ButtonGroup}
-      key={"up"}
-      id={"dropdown-button-drop-up"}
-      drop={"up"}
-      variant="secondary"
-      title={
-        Math.floor(minutes / 10) +
-        Math.floor(minutes % 10) +
-        ":" +
-        Math.floor(seconds / 10) +
-        (seconds % 10)
-      }
-    > <div className="popup">
-      <Dropdown.Item eventKey="1" time="30" onClick={modifyTimer}>
-        00:30
-      </Dropdown.Item>
-      <Dropdown.Item eventKey="2" time="60" onClick={modifyTimer}>
-        01:00
-      </Dropdown.Item>
-      <Dropdown.Item eventKey="3" time="60" onClick={modifyTimer}>
-        01:40
-      </Dropdown.Item>
-      <Dropdown.Item eventKey="4" time="120" onClick={modifyTimer}>
-        02:00
-      </Dropdown.Item>
-      <Dropdown.Item eventKey="5" time="240" onClick={modifyTimer}>
-        04:00
-      </Dropdown.Item>
-      <Dropdown.Item eventKey="6" time="300" onClick={modifyTimer}>
-        05:00
-      </Dropdown.Item>
-      </div>
-    </DropdownButton>
+      <DropdownButton
+        as={ButtonGroup}
+        key={"up"}
+        id={"dropdown-button-drop-up"}
+        drop={"up"}
+        variant="secondary"
+        title={
+          Math.floor(minutes / 10) +
+          Math.floor(minutes % 10) +
+          ":" +
+          Math.floor(seconds / 10) +
+          (seconds % 10)
+        }
+      >
+        {" "}
+        <div className="popup">
+          <Dropdown.Item eventKey="1" time="30" onClick={modifyTimer}>
+            00:30
+          </Dropdown.Item>
+          <Dropdown.Item eventKey="2" time="60" onClick={modifyTimer}>
+            01:00
+          </Dropdown.Item>
+          <Dropdown.Item eventKey="3" time="60" onClick={modifyTimer}>
+            01:40
+          </Dropdown.Item>
+          <Dropdown.Item eventKey="4" time="120" onClick={modifyTimer}>
+            02:00
+          </Dropdown.Item>
+          <Dropdown.Item eventKey="5" time="240" onClick={modifyTimer}>
+            04:00
+          </Dropdown.Item>
+          <Dropdown.Item eventKey="6" time="300" onClick={modifyTimer}>
+            05:00
+          </Dropdown.Item>
+        </div>
+      </DropdownButton>
     </div>
   );
 }
