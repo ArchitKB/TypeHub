@@ -45,11 +45,11 @@ export default function Login () {
       });
   };
 
-  const sectionStyle = {
-    backgroundColor: '#19A7CE',
-    height: '15vh',
+  // const sectionStyle = {
+  // //   backgroundColor: '#19A7CE',
+  // //   height: '15vh',
         
-  };
+  // // };
 
   // const imgStyle = {
   //   borderRadius: '1rem 0 0 1rem',
